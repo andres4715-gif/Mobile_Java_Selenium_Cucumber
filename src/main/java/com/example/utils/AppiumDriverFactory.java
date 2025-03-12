@@ -1,9 +1,10 @@
 package com.example.utils;
 
 import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.ios.IOSDriver;
+import io.appium.java_client.android.options.UiAutomator2Options;
+import io.appium.java_client.ios.options.XCUITestOptions;
 import lombok.extern.log4j.Log4j2;
-import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.HttpCommandExecutor;
 
 import java.net.URL;
 import java.time.Duration;
@@ -27,34 +28,34 @@ public class AppiumDriverFactory {
     try {
       log.info("Creating Android driver for device: {}, UDID: {}", deviceName, udid);
 
-      DesiredCapabilities capabilities = new DesiredCapabilities();
-      capabilities.setCapability("platformName", "Android");
-      capabilities.setCapability("deviceName", deviceName);
+      UiAutomator2Options options = new UiAutomator2Options();
+      options.setPlatformName("Android");
+      options.setDeviceName(deviceName);
 
       if (udid != null && !udid.isEmpty()) {
-        capabilities.setCapability("udid", udid);
+        options.setUdid(udid);
       }
 
-      capabilities.setCapability("automationName", automationName != null ? automationName : "UiAutomator2");
+      options.setAutomationName(automationName != null ? automationName : "UiAutomator2");
 
       if (appPath != null && !appPath.isEmpty()) {
-        capabilities.setCapability("app", appPath);
+        options.setApp(appPath);
       }
 
       if (appPackage != null && !appPackage.isEmpty()) {
-        capabilities.setCapability("appPackage", appPackage);
+        options.setAppPackage(appPackage);
       }
 
       if (appActivity != null && !appActivity.isEmpty()) {
-        capabilities.setCapability("appActivity", appActivity);
+        options.setAppActivity(appActivity);
       }
 
-      capabilities.setCapability("autoGrantPermissions", true);
-      capabilities.setCapability("noReset", false);
-      capabilities.setCapability("newCommandTimeout", 300);
+      options.setAutoGrantPermissions(true);
+      options.setNoReset(false);
+      options.setNewCommandTimeout(Duration.ofSeconds(300));
 
       URL url = new URL(APPIUM_SERVER_URL);
-      AndroidDriver driver = new AndroidDriver(url, capabilities);
+      AndroidDriver driver = new AndroidDriver(url, options);
       driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
       log.info("Android driver created successfully");
@@ -68,42 +69,43 @@ public class AppiumDriverFactory {
 
   /**
    * Create iOS driver with provided capabilities
-   * @param deviceName name of device
-   * @param udid UDID of device
+   *
+   * @param deviceName     name of device
+   * @param udid           UDID of device
    * @param automationName name of automation framework
-   * @param appPath path to app
-   * @param bundleId bundle identifier
+   * @param appPath        path to app
+   * @param bundleId       bundle identifier
    * @return IOSDriver instance
    */
-  public IOSDriver createIOSDriver(String deviceName, String udid, String automationName,
-                                   String appPath, String bundleId) {
+  public AndroidDriver createIOSDriver(String deviceName, String udid, String automationName,
+                                       String appPath, String bundleId) {
     try {
       log.info("Creating iOS driver for device: {}, UDID: {}", deviceName, udid);
 
-      DesiredCapabilities capabilities = new DesiredCapabilities();
-      capabilities.setCapability("platformName", "iOS");
-      capabilities.setCapability("deviceName", deviceName);
+      XCUITestOptions options = new XCUITestOptions();
+      options.setPlatformName("iOS");
+      options.setDeviceName(deviceName);
 
       if (udid != null && !udid.isEmpty()) {
-        capabilities.setCapability("udid", udid);
+        options.setUdid(udid);
       }
 
-      capabilities.setCapability("automationName", automationName != null ? automationName : "XCUITest");
+      options.setAutomationName(automationName != null ? automationName : "XCUITest");
 
       if (appPath != null && !appPath.isEmpty()) {
-        capabilities.setCapability("app", appPath);
+        options.setApp(appPath);
       }
 
       if (bundleId != null && !bundleId.isEmpty()) {
-        capabilities.setCapability("bundleId", bundleId);
+        options.setBundleId(bundleId);
       }
 
-      capabilities.setCapability("autoAcceptAlerts", true);
-      capabilities.setCapability("noReset", false);
-      capabilities.setCapability("newCommandTimeout", 300);
+      options.setAutoAcceptAlerts(true);
+      options.setNoReset(false);
+      options.setNewCommandTimeout(Duration.ofSeconds(300));
 
       URL url = new URL(APPIUM_SERVER_URL);
-      IOSDriver driver = new IOSDriver(url, capabilities);
+      AndroidDriver driver = new AndroidDriver(new HttpCommandExecutor(url), options);
       driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
       log.info("iOS driver created successfully");

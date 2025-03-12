@@ -15,76 +15,43 @@ import java.util.Map;
 @Log4j2
 public class Hooks {
   private static final Map<String, Object> testContext = new HashMap<>();
-  private AppiumDriver driver;
+  private final AppiumConfig appiumConfig = AppiumConfig.getInstance();
 
   @Before
-  public void setup(Scenario scenario) {
+  public void setUp(Scenario scenario) {
     log.info("Starting scenario: {}", scenario.getName());
 
     // Initialize driver
-    driver = AppiumConfig.getInstance().getDriver();
+    appiumConfig.initializeDriver();
+    testContext.put("driver", appiumConfig.getDriver());
 
-    // Add driver to test context
-    testContext.put("driver", driver);
-
-    // Initialize scenario to test context
-    testContext.put("scenario", scenario);
-
-    log.info("Test setup completed successfully");
+    log.info("Driver initialized successfully");
   }
 
   @After
-  public void teardown(Scenario scenario) {
+  public void tearDown(Scenario scenario) {
     log.info("Finishing scenario: {}", scenario.getName());
 
-    if (scenario.isFailed() && driver != null) {
+    // Take screenshot if scenario fails
+    if (scenario.isFailed() && testContext.containsKey("driver")) {
       log.info("Scenario failed, taking screenshot");
-      try {
-        byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-        scenario.attach(screenshot, "image/png", "Screenshot-" + scenario.getName());
-      } catch (Exception e) {
-        log.error("Failed to take screenshot", e);
-      }
+      TakesScreenshot driver = (TakesScreenshot) testContext.get("driver");
+      byte[] screenshot = driver.getScreenshotAs(OutputType.BYTES);
+      scenario.attach(screenshot, "image/png", "Screenshot on failure");
     }
 
-    // Don't quit the driver here to reuse it between scenarios
-    // Only clear the context
+    // Quit driver
+    appiumConfig.quitDriver();
     testContext.clear();
 
-    log.info("Test teardown completed successfully");
+    log.info("Resources cleaned up successfully");
   }
 
-  @After(order = 100)
-  public void finalTeardown() {
-    // This runs after all scenarios as the last hook
-    // Quit the driver here
-    AppiumConfig.getInstance().quitDriver();
-    log.info("Driver has been quit successfully");
-  }
-
-  /**
-   * Get test context
-   * @return test context map
-   */
-  public static Map<String, Object> getTestContext() {
-    return testContext;
-  }
-
-  /**
-   * Get value from test context
-   * @param key key to get value for
-   * @return value from test context
-   */
   public static Object getFromTestContext(String key) {
     return testContext.get(key);
   }
 
-  /**
-   * Add value to test context
-   * @param key key to add value for
-   * @param value value to add
-   */
-  public static void addToTestContext(String key, Object value) {
+  public static void putInTestContext(String key, Object value) {
     testContext.put(key, value);
   }
 }
