@@ -116,6 +116,7 @@ $ mvn test -Dbrowserstack=true
 - [ ] Verify if log feature is working fine
 - [ ] Make a new scenario with complete steps
 - [ ] Check the BrowserStack execution
+- [ ] Improve the readme file
 
 ---
 🛠️⚙️🔨 Framework in construction 🛠️⚙️🔨
