@@ -1,0 +1,45 @@
+├── src
+│   ├── main
+│   │   ├── java
+│   │   │   └── com
+│   │   │       └── tuempresa
+│   │   │           ├── base
+│   │   │           │   ├── BasePage.java
+│   │   │           │   └── BaseTest.java
+│   │   │           ├── config
+│   │   │           │   ├── AppiumConfig.java
+│   │   │           │   ├── BrowserStackConfig.java
+│   │   │           │   └── ConfigReader.java
+│   │   │           ├── pages
+│   │   │           │   ├── LoginPage.java
+│   │   │           │   └── HomePage.java
+│   │   │           ├── locators
+│   │   │           │   ├── LoginPageLocators.java
+│   │   │           │   └── HomePageLocators.java
+│   │   │           ├── utils
+│   │   │           │   ├── AppiumDriverFactory.java
+│   │   │           │   ├── WaitUtils.java
+│   │   │           │   └── TestDataUtils.java
+│   │   │           └── constants
+│   │   │               ├── TimeoutConstants.java
+│   │   │               └── AppConstants.java
+│   │   └── resources
+│   │       ├── config.properties
+│   │       └── browserstack.properties
+│   └── test
+│       ├── java
+│       │   └── com
+│       │       └── tuempresa
+│       │           ├── stepdefinitions
+│       │           │   ├── Hooks.java
+│       │           │   ├── LoginSteps.java
+│       │           │   └── HomeSteps.java
+│       │           └── runners
+│       │               └── TestRunner.java
+│       └── resources
+│           ├── features
+│           │   ├── login.feature
+│           │   └── home.feature
+│           └── apps
+│               └── sampleApp.apk
+└── pom.xml
