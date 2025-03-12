@@ -26,6 +26,7 @@ public class WaitUtils {
 
   /**
    * Wait for element to be clickable
+   *
    * @param element element to wait for
    * @return WebElement
    */
@@ -36,6 +37,7 @@ public class WaitUtils {
 
   /**
    * Wait for element to be visible
+   *
    * @param element element to wait for
    * @return WebElement
    */
@@ -46,7 +48,8 @@ public class WaitUtils {
 
   /**
    * Wait for element to be visible with custom timeout
-   * @param element element to wait for
+   *
+   * @param element          element to wait for
    * @param timeoutInSeconds timeout in seconds
    * @return WebElement
    */
@@ -58,6 +61,7 @@ public class WaitUtils {
 
   /**
    * Wait for element to be invisible
+   *
    * @param element element to wait for
    * @return boolean
    */
@@ -68,6 +72,7 @@ public class WaitUtils {
 
   /**
    * Wait for element to be present
+   *
    * @param locator locator to find element
    * @return WebElement
    */
@@ -78,10 +83,11 @@ public class WaitUtils {
 
   /**
    * Swipe from one point to another
-   * @param startX start X coordinate
-   * @param startY start Y coordinate
-   * @param endX end X coordinate
-   * @param endY end Y coordinate
+   *
+   * @param startX     start X coordinate
+   * @param startY     start Y coordinate
+   * @param endX       end X coordinate
+   * @param endY       end Y coordinate
    * @param durationMs duration in milliseconds
    */
   @SuppressWarnings("rawtypes")
@@ -97,6 +103,7 @@ public class WaitUtils {
 
   /**
    * Tap by coordinates
+   *
    * @param x X coordinate
    * @param y Y coordinate
    */
@@ -110,6 +117,7 @@ public class WaitUtils {
 
   /**
    * Wait for specific duration
+   *
    * @param milliseconds duration to wait in milliseconds
    */
   public void waitFor(long milliseconds) {

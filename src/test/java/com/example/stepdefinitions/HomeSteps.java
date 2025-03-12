@@ -2,12 +2,12 @@ package com.example.stepdefinitions;
 
 //import com.example.pages.HomePage;
 //import com.example.pages.LoginPage;
+
 import io.appium.java_client.AppiumDriver;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import lombok.extern.log4j.Log4j2;
-import org.junit.jupiter.api.Assertions;
 
 @Log4j2
 public class HomeSteps {

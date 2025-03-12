@@ -1,7 +1,6 @@
 package com.example.stepdefinitions;
 
 import com.example.config.AppiumConfig;
-import io.appium.java_client.AppiumDriver;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;

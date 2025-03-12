@@ -16,6 +16,7 @@ public class ConfigReader {
 
   /**
    * Get properties
+   *
    * @return properties object
    */
   public Properties getProperties() {
@@ -24,6 +25,7 @@ public class ConfigReader {
 
   /**
    * Get properties from specific file
+   *
    * @param fileName name of file
    * @return properties from file
    */
@@ -33,6 +35,7 @@ public class ConfigReader {
 
   /**
    * Load properties from file
+   *
    * @param fileName name of file
    * @return properties from file
    */
@@ -54,6 +57,7 @@ public class ConfigReader {
 
   /**
    * Get property value
+   *
    * @param key property key
    * @return property value
    */
@@ -67,7 +71,8 @@ public class ConfigReader {
 
   /**
    * Get property value with default
-   * @param key property key
+   *
+   * @param key          property key
    * @param defaultValue default value
    * @return property value or default
    */
@@ -81,7 +86,8 @@ public class ConfigReader {
 
   /**
    * Get boolean property
-   * @param key property key
+   *
+   * @param key          property key
    * @param defaultValue default value
    * @return boolean property
    */
@@ -95,7 +101,8 @@ public class ConfigReader {
 
   /**
    * Get integer property
-   * @param key property key
+   *
+   * @param key          property key
    * @param defaultValue default value
    * @return integer property
    */

@@ -28,6 +28,7 @@ public class BasePage {
 
   /**
    * Click on element with explicit wait
+   *
    * @param element WebElement to click
    */
   protected void click(WebElement element) {
@@ -38,8 +39,9 @@ public class BasePage {
 
   /**
    * Type text in input field
+   *
    * @param element WebElement to type in
-   * @param text Text to type
+   * @param text    Text to type
    */
   protected void type(WebElement element, String text) {
     waitUtils.waitForElementToBeVisible(element);
@@ -50,6 +52,7 @@ public class BasePage {
 
   /**
    * Get text from element
+   *
    * @param element WebElement to get text from
    * @return Text of element
    */
@@ -61,6 +64,7 @@ public class BasePage {
 
   /**
    * Check if element is displayed
+   *
    * @param element WebElement to check
    * @return true if element is displayed, false otherwise
    */
@@ -75,6 +79,7 @@ public class BasePage {
 
   /**
    * Wait for element to appear with locator
+   *
    * @param locator By locator
    * @return WebElement
    */
@@ -84,10 +89,11 @@ public class BasePage {
 
   /**
    * Swipe from one point to another
-   * @param startX start X coordinate
-   * @param startY start Y coordinate
-   * @param endX end X coordinate
-   * @param endY end Y coordinate
+   *
+   * @param startX     start X coordinate
+   * @param startY     start Y coordinate
+   * @param endX       end X coordinate
+   * @param endY       end Y coordinate
    * @param durationMs duration in milliseconds
    */
   protected void swipe(int startX, int startY, int endX, int endY, int durationMs) {
@@ -96,6 +102,7 @@ public class BasePage {
 
   /**
    * Tap by coordinates
+   *
    * @param x X coordinate
    * @param y Y coordinate
    */

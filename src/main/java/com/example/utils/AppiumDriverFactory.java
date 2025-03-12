@@ -15,12 +15,13 @@ public class AppiumDriverFactory {
 
   /**
    * Create Android driver with provided capabilities
-   * @param deviceName name of device
-   * @param udid UDID of device
+   *
+   * @param deviceName     name of device
+   * @param udid           UDID of device
    * @param automationName name of automation framework
-   * @param appPath path to app
-   * @param appPackage app package
-   * @param appActivity app activity
+   * @param appPath        path to app
+   * @param appPackage     app package
+   * @param appActivity    app activity
    * @return AndroidDriver instance
    */
   public AndroidDriver createAndroidDriver(String deviceName, String udid, String automationName,

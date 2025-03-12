@@ -4,7 +4,6 @@ import com.example.utils.AppiumDriverFactory;
 import io.appium.java_client.AppiumDriver;
 import lombok.extern.log4j.Log4j2;
 
-import java.io.IOException;
 import java.util.Properties;
 
 @Log4j2
