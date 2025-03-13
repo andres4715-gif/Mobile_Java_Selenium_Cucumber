@@ -52,12 +52,12 @@ public class AppiumConfig {
       throw new IllegalArgumentException("Unsupported platform: " + platformName);
     }
 
-    log.info("Appium driver initialized successfully");
+    log.info("✅ Appium driver for {} with {} initialized successfully", platformName, deviceName);
   }
 
   public void quitDriver() {
     if (driver != null) {
-      log.info("Quitting Appium driver");
+      log.info("🛑 Quitting Appium driver");
       driver.quit();
       driver = null;
     }

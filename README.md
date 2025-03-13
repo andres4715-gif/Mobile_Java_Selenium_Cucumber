@@ -113,6 +113,7 @@ $ mvn test -Dbrowserstack=true
 ```
 
 # 🔎 TO DO...🛠
+- [X] Install and Use the rindustest app for new testcases
 - [ ] Verify if log feature is working fine
 - [ ] Make a new scenario with complete steps
 - [ ] Check the BrowserStack execution
