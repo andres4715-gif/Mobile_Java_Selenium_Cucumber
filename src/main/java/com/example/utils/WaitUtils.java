@@ -28,22 +28,20 @@ public class WaitUtils {
    * Wait for element to be clickable
    *
    * @param element element to wait for
-   * @return WebElement
    */
-  public WebElement waitForElementToBeClickable(WebElement element) {
+  public void waitForElementToBeClickable(WebElement element) {
     log.debug("Waiting for element to be clickable: {}", element);
-    return wait.until(ExpectedConditions.elementToBeClickable(element));
+    wait.until(ExpectedConditions.elementToBeClickable(element));
   }
 
   /**
    * Wait for element to be visible
    *
    * @param element element to wait for
-   * @return WebElement
    */
-  public WebElement waitForElementToBeVisible(WebElement element) {
+  public void waitForElementToBeVisible(WebElement element) {
     log.debug("Waiting for element to be visible: {}", element);
-    return wait.until(ExpectedConditions.visibilityOf(element));
+    wait.until(ExpectedConditions.visibilityOf(element));
   }
 
   /**
