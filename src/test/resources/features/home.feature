@@ -8,7 +8,3 @@ Feature: Activities to do  Functionality
 
   Scenario: Create a new task activity to do using the Rindus test app
     When I tap on the selected user
-#    And I enter password "password123"
-#    And I tap on the login button
-#    Then I should be logged in successfully
-#    And I should see the home screen
