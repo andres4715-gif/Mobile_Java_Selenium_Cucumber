@@ -25,6 +25,7 @@ public class ConfigReader {
 
   /**
    * Get properties from specific file
+   *
    * @param fileName name of file
    * @return properties from file
    */

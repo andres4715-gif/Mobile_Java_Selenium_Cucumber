@@ -8,21 +8,18 @@ import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
-import java.util.HashMap;
-import java.util.Map;
-
 @Log4j2
 public class Hooks {
-  private static final Map<String, Object> testContext = new HashMap<>();
-  private final AppiumConfig appiumConfig = AppiumConfig.getInstance();
+  private static final ThreadLocal<AppiumConfig> appiumConfig = ThreadLocal.withInitial(AppiumConfig::getInstance);
+  private static final ThreadLocal<Object> driver = new ThreadLocal<>();
 
   @Before
   public void setUp(Scenario scenario) {
     log.info("Starting scenario: {}", scenario.getName());
 
     // Initialize driver
-    appiumConfig.initializeDriver();
-    testContext.put("driver", appiumConfig.getDriver());
+    appiumConfig.get().initializeDriver();
+    driver.set(appiumConfig.get().getDriver());
 
     log.info("Driver initialized successfully");
   }
@@ -32,25 +29,22 @@ public class Hooks {
     log.info("Finishing scenario: {}", scenario.getName());
 
     // Take screenshot if scenario fails
-    if (scenario.isFailed() && testContext.containsKey("driver")) {
+    if (scenario.isFailed() && driver.get() != null) {
       log.info("Scenario failed, taking screenshot");
-      TakesScreenshot driver = (TakesScreenshot) testContext.get("driver");
-      byte[] screenshot = driver.getScreenshotAs(OutputType.BYTES);
+      TakesScreenshot screenshotDriver = (TakesScreenshot) driver.get();
+      byte[] screenshot = screenshotDriver.getScreenshotAs(OutputType.BYTES);
       scenario.attach(screenshot, "image/png", "Screenshot on failure");
     }
 
     // Quit driver
-    appiumConfig.quitDriver();
-    testContext.clear();
+    appiumConfig.get().quitDriver();
+    driver.remove();
 
     log.info("Resources cleaned up successfully");
   }
 
-  public static Object getFromTestContext(String key) {
-    return testContext.get(key);
-  }
-
-  public static void putInTestContext(String key, Object value) {
-    testContext.put(key, value);
+  // Methods to get the driver in the secure way
+  public static Object getFromTestContext() {
+    return driver.get();
   }
 }
